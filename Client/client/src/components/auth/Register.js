@@ -1,13 +1,12 @@
 import React, { Fragment, useState } from "react";
-import {connect} from 'react-redux';
-import {Link,Navigate} from 'react-router-dom'
-import {setAlert} from '../../actions/alert'
-import {register} from '../../actions/auth'
-//import axios from 'axios'
-import PropTypes from 'prop-types'
+import { connect } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
+import { setAlert } from "../../actions/alert";
+import { register } from "../../actions/auth";
+import axios from "axios";
+import PropTypes from "prop-types";
 
-
-const Register = ({setAlert,register,isAuthenticated}) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,39 +18,37 @@ const Register = ({setAlert,register,isAuthenticated}) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async(e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      setAlert("passwords do not match",'danger');
+      setAlert("passwords do not match", "danger");
     } else {
-        // const newUser={
-        //     name,
-        //     email,
-        //     password
-        // }
-        // try {
-        //     const config={
-        //         header:{
-        //             'Content-Type': 'application/json'
-        //         }
-        //     }
-        //     const body=JSON.stringify(newUser);
+      const newUser = {
+        name,
+        email,
+        password,
+      };
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+        const body = JSON.stringify(newUser);
 
-        //     const res=await axios.post('api/users',body,config);
-        //     console.log(res.data)
-
-        // } catch (err) {
-        //     console.log(err.response.data)
-        // }
-        //console.log("SUCCESS")
-        register({name,email,password})
-        }
+        const res = await axios.post("/api/users", body, config);
+        console.log(res.data);
+      } catch (err) {
+        console.log(err.response.data);
+      }
+      console.log("SUCCESS");
+      //register({name,email,password})
+    }
   };
-
-  if(isAuthenticated){
-    return <Navigate to='/dashboard'/>
+console.log("check authentication",isAuthenticated)
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
   }
-
 
   return (
     <Fragment>
@@ -71,7 +68,13 @@ const Register = ({setAlert,register,isAuthenticated}) => {
           />
         </div>
         <div className="form-group">
-          <input type="email" placeholder="Email Address" name="email" />
+          <input
+            type="email"
+            placeholder="Email Address"
+            name="email"
+            value={email}
+            onChange={(e) => onChange(e)}
+          />
           <small className="form-text">
             This site uses Gravatar so if you want a profile image, use a
             Gravatar email
@@ -106,14 +109,14 @@ const Register = ({setAlert,register,isAuthenticated}) => {
   );
 };
 
-Register.prototype={
-  setAlert:PropTypes.func.isRequired,
-  register:PropTypes.func.isRequired,
-  isAuthenticated:PropTypes.bool
-}
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps,{setAlert,register})(Register);
+export default connect(mapStateToProps, { setAlert, register })(Register);

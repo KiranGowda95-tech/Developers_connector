@@ -6,6 +6,7 @@ import { login } from "../../actions/auth";
 //import axios from 'axios'
 
 const Login = ({ login, isAuthenticated }) => {
+  console.log("entering to login page");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,12 +18,13 @@ const Login = ({ login, isAuthenticated }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    //console.log("Success")
+    console.log("Success");
     login(email, password);
   };
-
+  console.log("entering after login");
   //Redirect if logged in
   if (isAuthenticated) {
+    console.log("entering to dashboard ");
     return <Navigate to="/dashboard" />;
   }
 
@@ -34,7 +36,13 @@ const Login = ({ login, isAuthenticated }) => {
       </p>
       <form className="form" onSubmit={(e) => onSubmit(e)}>
         <div className="form-group">
-          <input type="email" placeholder="Email Address" name="email" />
+          <input
+            type="email"
+            placeholder="Email Address"
+            name="email"
+            value={email}
+            onChange={(e) => onChange(e)}
+          />
         </div>
         <div className="form-group">
           <input
@@ -61,7 +69,7 @@ Login.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, { login })(Login);
