@@ -8,11 +8,12 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  CLEAR_PROFILE,
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 
 //Load User
- export const loadUser = () => async (dispatch) => {
+export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -68,9 +69,9 @@ export const login = (email, password) => async (dispatch) => {
   const body = JSON.stringify({ email, password });
 
   try {
-    console.log("entering to auth login")
+    console.log("entering to auth login");
     const res = await axios.post("/api/auth", body, config);
-    console.log("entering after api auth login",res)
+    console.log("entering after api auth login", res);
 
     dispatch({
       type: LOGIN_SUCCESS,
@@ -90,5 +91,6 @@ export const login = (email, password) => async (dispatch) => {
 
 //Logout / clear Profile
 export const logout = () => (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
 };
