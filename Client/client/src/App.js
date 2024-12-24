@@ -5,6 +5,9 @@ import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Alert from "./components/layout/Alert";
+import Dashboard from "./components/dashboard/Dashboard";
+import CreateProfile from "./components/profile-forms/CreateProfile";
+import privateRoute from "./components/routing/privateRoute";
 import "./App.css";
 // Redux
 import { Provider } from "react-redux";
@@ -30,6 +33,16 @@ const App = () =>{
             <Route path="/" element={<Landing />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path='/dashboard' element={
+              <privateRoute>
+                <Dashboard/>                
+              </privateRoute>
+            } />
+            <Route path='/create-profile' element={
+              <privateRoute>
+                <CreateProfile/>                
+              </privateRoute>
+            } />
           </Routes>
         </div>
       </Fragment>
