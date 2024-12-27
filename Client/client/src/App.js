@@ -8,7 +8,9 @@ import Alert from "./components/layout/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/profile-forms/CreateProfile";
 import EditProfile from "./components/profile-forms/EditProfile";
-import privateRoute from "./components/routing/privateRoute";
+import AddExperience from "./components/profile-forms/AddExperience";
+import AddEducation from "./components/profile-forms/AddEducation";
+import PrivateRoute from "./components/routing/PrivateRoute";
 import "./App.css";
 // Redux
 import { Provider } from "react-redux";
@@ -20,6 +22,7 @@ if(localStorage.token){
   setAuthToken(localStorage.token);
 }
 const App = () =>{  
+  
   useEffect(()=>{
     store.dispatch(loadUser())
   },[])
@@ -35,19 +38,29 @@ const App = () =>{
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path='/dashboard' element={
-              <privateRoute>
+              <PrivateRoute>
                 <Dashboard/>                
-              </privateRoute>
+              </PrivateRoute>
             } />
             <Route path='/create-profile' element={
-              <privateRoute>
+              <PrivateRoute>
                 <CreateProfile/>                
-              </privateRoute>
+              </PrivateRoute>
             } />
             <Route path='/edit-profile' element={
-              <privateRoute>
+              <PrivateRoute>
                 <EditProfile/>                
-              </privateRoute>
+              </PrivateRoute>
+            } />
+            <Route path='/add-experience' element={
+              <PrivateRoute>
+                <AddExperience/>                
+              </PrivateRoute>
+            } />
+            <Route path='/add-education' element={
+              <PrivateRoute>
+                <AddEducation/>                
+              </PrivateRoute>
             } />
           </Routes>
         </div>
