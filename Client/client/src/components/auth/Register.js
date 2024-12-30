@@ -46,9 +46,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     }
   };
 console.log("check authentication",isAuthenticated)
-  if (isAuthenticated) {
-    return <Navigate to="/dashboard" />;
-  }
+if (isAuthenticated) {
+  return <Navigate to="/login" />;
+}
 
   return (
     <Fragment>
