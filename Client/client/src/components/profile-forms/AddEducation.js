@@ -121,6 +121,6 @@ const AddEducation = ({addEducation}) => {
 AddEducation.propTypes = {
   addEducation: PropTypes.func.isRequired,
 };
-const mapDispatchToProps = { addEducation };
+//const mapDispatchToProps = { addEducation };
 
-export default connect(null, mapDispatchToProps)(AddEducation);
+export default connect(null, {addEducation})(AddEducation);
