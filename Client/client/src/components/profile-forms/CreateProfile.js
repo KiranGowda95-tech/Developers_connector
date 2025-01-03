@@ -1,12 +1,11 @@
 import React, { Fragment, useState } from "react";
-import {Link,useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {createProfile} from '../../actions/profile'
+import { createProfile } from "../../actions/profile";
 
-const CreateProfile = ({createProfile,history}) => {
-
-    const navigate=useNavigate()
+const CreateProfile = ({ createProfile, history }) => {
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     company: "",
@@ -42,11 +41,11 @@ const CreateProfile = ({createProfile,history}) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit=(e)=>{
+  const onSubmit = (e) => {
     e.preventDefault();
-    createProfile(formData,history);
-    navigate('/dashboard')
-  }
+    createProfile(formData, history);
+    navigate("/dashboard");
+  };
   return (
     <Fragment>
       <h1 className="large text-primary">Create Your Profile</h1>
@@ -55,7 +54,7 @@ const CreateProfile = ({createProfile,history}) => {
         profile stand out
       </p>
       <small>* = required field</small>
-      <form className="form" onSubmit={(e)=>onSubmit(e)}>
+      <form className="form" onSubmit={(e) => onSubmit(e)}>
         <div className="form-group">
           <select
             name="status"
@@ -158,37 +157,62 @@ const CreateProfile = ({createProfile,history}) => {
           <Fragment>
             <div className="form-group social-input">
               <i className="fab fa-twitter fa-2x"></i>
-              <input type="text" placeholder="Twitter URL" name="twitter" value={twitter}
-            onChange={(e) => onChange(e)}/>
+              <input
+                type="text"
+                placeholder="Twitter URL"
+                name="twitter"
+                value={twitter}
+                onChange={(e) => onChange(e)}
+              />
             </div>
 
             <div className="form-group social-input">
               <i className="fab fa-facebook fa-2x"></i>
-              <input type="text" placeholder="Facebook URL" name="facebook" value={facebook}
-            onChange={(e) => onChange(e)}/>
+              <input
+                type="text"
+                placeholder="Facebook URL"
+                name="facebook"
+                value={facebook}
+                onChange={(e) => onChange(e)}
+              />
             </div>
 
             <div className="form-group social-input">
               <i className="fab fa-youtube fa-2x"></i>
-              <input type="text" placeholder="YouTube URL" name="youtube" value={youtube}
-            onChange={(e) => onChange(e)}/>
+              <input
+                type="text"
+                placeholder="YouTube URL"
+                name="youtube"
+                value={youtube}
+                onChange={(e) => onChange(e)}
+              />
             </div>
 
             <div className="form-group social-input">
               <i className="fab fa-linkedin fa-2x"></i>
-              <input type="text" placeholder="Linkedin URL" name="linkedin" value={linkedin}
-            onChange={(e) => onChange(e)}/>
+              <input
+                type="text"
+                placeholder="Linkedin URL"
+                name="linkedin"
+                value={linkedin}
+                onChange={(e) => onChange(e)}
+              />
             </div>
 
             <div className="form-group social-input">
               <i className="fab fa-instagram fa-2x"></i>
-              <input type="text" placeholder="Instagram URL" name="instagram" value={instagram}
-            onChange={(e) => onChange(e)}/>
+              <input
+                type="text"
+                placeholder="Instagram URL"
+                name="instagram"
+                value={instagram}
+                onChange={(e) => onChange(e)}
+              />
             </div>
           </Fragment>
         )}
 
-        <input type="onSubmit" className="btn btn-primary my-1" />
+        <input type="submit" className="btn btn-primary my-1" />
         <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
         </Link>
@@ -198,8 +222,7 @@ const CreateProfile = ({createProfile,history}) => {
 };
 
 CreateProfile.propTypes = {
-    createProfile:PropTypes.func.isRequired,
+  createProfile: PropTypes.func.isRequired,
 };
 
-
-export default connect(null,{createProfile})(CreateProfile);
+export default connect(null, { createProfile })(CreateProfile);
