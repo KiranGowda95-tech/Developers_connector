@@ -124,8 +124,8 @@ export const getPost = (id) => async (dispatch) => {
   }
 };
 
-//Delete comment
-export const deleteComment = (postId, formData) => async (dispatch) => {
+//Add comment
+export const addComment = (postId, formData) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -142,7 +142,7 @@ export const deleteComment = (postId, formData) => async (dispatch) => {
       type: ADD_COMMENT,
       payload: res.data,
     });
-    dispatch(setAlert("Post Created", "success"));
+    dispatch(setAlert("Comment Added", "success"));
   } catch (err) {
     dispatch({
       type: POST_ERROR,
@@ -151,10 +151,10 @@ export const deleteComment = (postId, formData) => async (dispatch) => {
   }
 };
 
-//Add comment
-export const addComment = (postId, commentId) => async (dispatch) => {
+//delete comment
+export const deleteComment = (postId, commentId) => async (dispatch) => {
   try {
-    await axios.post(`/api/posts/comment/${postId}/${commentId}`);
+    await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
 
     dispatch({
       type: REMOVE_COMMENT,

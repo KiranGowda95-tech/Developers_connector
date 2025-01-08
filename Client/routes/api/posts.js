@@ -151,7 +151,7 @@ router.put("/unlike/:id", auth, async (req, res) => {
   }
 });
 
-//@route Post api/posts/comment
+//@route Post api/posts/comment/:id
 //@desc Comment on a post
 //@access Private
 
@@ -162,9 +162,11 @@ router.post(
     console.log("entering to post api");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log('entering into errors')
       return res.status(400).json({ errors: errors.array() });
     }
     try {
+      console.log('entering to trycatch block')
       const user = await User.findById(req.user.id).select("-password");
       const post = await Post.findById(req.params.id);
 
@@ -178,7 +180,7 @@ router.post(
       post.comments.unshift(newComment);
 
       await post.save();
-
+      console.log('entering to after save in post api comment')
       res.json(post.comments);
     } catch (err) {
       console.error(err.message);
