@@ -3,9 +3,9 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
 const Post = require("../../models/Post");
-const Profile = require("../../models/Profile");
+//const Profile = require("../../models/Profile");
 const User = require("../../models/Users");
-const { post } = require("request");
+//const { post } = require("request");
 
 //@route Post api/posts
 //@desc create a post route

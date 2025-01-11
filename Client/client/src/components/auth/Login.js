@@ -20,11 +20,12 @@ const Login = ({ login, isAuthenticated }) => {
     e.preventDefault();
     console.log("Success");
     login(email, password);
-    if (isAuthenticated) {
-      console.log("entering to dashboard ");
-      return <Navigate to="/dashboard" />;
-    }
   };
+
+  if (isAuthenticated) {
+    console.log("entering to dashboard ");
+    return <Navigate to="/dashboard" />;
+  }
   console.log("entering after login");
   //Redirect if logged in
   
